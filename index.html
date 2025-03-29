@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-[#131921] text-white sticky top-0 z-50">
+        <div class="flex items-center p-2 flex-grow">
+            <!-- Logo -->
+            <div class="mt-2 flex items-center flex-grow sm:flex-grow-0">
+                <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" 
+                     class="h-8 object-contain cursor-pointer mx-4">
+            </div>
+
+            <!-- Search Bar -->
+            <div class="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500">
+                <input class="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none text-black" 
+                       type="text">
+                <div class="h-10 p-2 text-black">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <!-- Right Navigation -->
+            <div class="flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
+                <div class="link">
+                    <p>Hello, Sign in</p>
+                    <p class="font-extrabold md:text-sm">Account & Lists</p>
+                </div>
+                <div class="link">
+                    <p>Returns</p>
+                    <p class="font-extrabold md:text-sm">& Orders</p>
+                </div>
+                <div class="relative link flex items-center">
+                    <span class="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">0</span>
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <p class="hidden md:inline font-extrabold md:text-sm mt-2">Cart</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="flex items-center space-x-3 p-2 pl-6 bg-[#232F3E] text-white text-sm">
+            <div class="link flex items-center">
+                <i class="fas fa-bars mr-1"></i>
+                <p>All</p>
+            </div>
+            <p class="link">Today's Deals</p>
+            <p class="link">Customer Service</p>
+            <p class="link">Registry</p>
+            <p class="link">Gift Cards</p>
+            <p class="link">Sell</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Banner -->
+        <div class="relative">
+            <img src="https://m.media-amazon.com/images/I/61DUO0NqyyL._SX3000_.jpg" 
+                 class="w-full h-auto object-cover" alt="Hero Banner">
+            <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-gray-100 to-transparent"></div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto max-w-7xl">
+            <!-- Product 1 -->
+            <div class="relative m-5 bg-white z-30 p-5 rounded-md">
+                <p class="absolute top-2 right-2 text-xs italic text-gray-400">Category</p>
+                <img src="https://m.media-amazon.com/images/I/71Swqqe7XAL._AC_UY218_.jpg" 
+                     alt="Product" class="h-48 w-full object-contain">
+                <h4 class="my-3 font-medium">Amazon Echo (3rd Gen) - Smart speaker with Alexa</h4>
+                <div class="flex">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                </div>
+                <p class="text-xs my-2 line-clamp-2">Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small spaces.</p>
+                <div class="mb-5">
+                    <p class="font-bold">$29.99</p>
+                    <p class="text-xs text-gray-500">FREE Delivery</p>
+                </div>
+                <button class="mt-auto button bg-yellow-400 rounded-sm py-1 px-3 text-xs font-medium hover:bg-yellow-500">
+                    Add to Cart
+                </button>
+            </div>
+
+            <!-- More products would go here following same pattern -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#232F3E] text-white mt-10">
+        <div class="p-10 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div>
+                <h3 class="font-bold mb-3">Get to Know Us</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>Careers</li>
+                    <li>Blog</li>
+                    <li>About Amazon</li>
+                    <li>Investor Relations</li>
+                </ul>
+            </div>
+            <!-- More footer columns would go here -->
+        </div>
+        <div class="bg-[#131A22] p-5 text-center text-xs">
+            <p>© 1996-2023, Amazon.com, Inc. or its affiliates</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
