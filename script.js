@@ -73,29 +73,125 @@ productCards.forEach(card => {
 if (document.getElementById('imageUpload')) {
     const imageUpload = document.getElementById('imageUpload');
     const imagePreview = document.getElementById('imagePreview');
+    const dropZone = document.getElementById('dropZone');
     
-    imageUpload.addEventListener('change', function(e) {
+    // Handle file selection
+    imageUpload.addEventListener('change', handleFiles);
+    
+    // Drag and drop functionality
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight() {
+        dropZone.classList.add('active');
+    }
+
+    function unhighlight() {
+        dropZone.classList.remove('active');
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        imageUpload.files = files;
+        handleFiles({ target: imageUpload });
+    }
+
+    function handleFiles(e) {
         imagePreview.innerHTML = '';
         const files = e.target.files;
         
-        for (let i = 0; i < Math.min(files.length, 10); i++) {
+        if (files.length > 10) {
+            alert('Maximum 10 images allowed');
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            if (!file.type.match('image.*')) continue;
+            if (!file.type.match('image.*')) {
+                alert('Only image files are allowed');
+                continue;
+            }
             
             const reader = new FileReader();
             reader.onload = function(e) {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'relative';
+                
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.className = 'w-24 h-24 object-cover rounded border';
-                imagePreview.appendChild(img);
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.innerHTML = '&times;';
+                removeBtn.className = 'absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs';
+                removeBtn.onclick = () => imgContainer.remove();
+                
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(removeBtn);
+                imagePreview.appendChild(imgContainer);
             }
             reader.readAsDataURL(file);
         }
-    });
+    }
 
     document.getElementById('productForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('Product submitted successfully!');
-        // In real implementation, would send to server
+        if (!validateForm()) return;
+        
+        // Simulate upload progress
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+        
+        setTimeout(() => {
+            alert('Product submitted successfully!');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Product';
+            e.target.reset();
+            imagePreview.innerHTML = '';
+        }, 1500);
     });
+
+    function validateForm() {
+        const requiredFields = document.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                field.classList.remove('border-red-500');
+            }
+        });
+
+        if (!isValid) {
+            alert('Please fill all required fields');
+            return false;
+        }
+
+        if (!imageUpload.files.length) {
+            alert('Please upload at least one product image');
+            return false;
+        }
+
+        return true;
+    }
 }
