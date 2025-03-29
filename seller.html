@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .drop-zone {
+            transition: all 0.3s;
+        }
+        .drop-zone.active {
+            border-color: #3b82f6;
+            background-color: #f0f7ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-[#232F3E] text-white p-4">
+            <h2 class="text-xl font-bold mb-6">Seller Center</h2>
+            <nav>
+                <ul class="space-y-2">
+                    <li class="p-2 hover:bg-gray-700 rounded"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</li>
+                    <li class="p-2 bg-gray-700 rounded"><i class="fas fa-plus-circle mr-2"></i>Add Product</li>
+                    <li class="p-2 hover:bg-gray-700 rounded"><i class="fas fa-box-open mr-2"></i>Inventory</li>
+                    <li class="p-2 hover:bg-gray-700 rounded"><i class="fas fa-chart-line mr-2"></i>Analytics</li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8 overflow-auto">
+            <h1 class="text-2xl font-bold mb-6">Add New Product</h1>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <form id="productForm">
+                    <!-- Image Upload -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Product Images</label>
+                        <div id="dropZone" class="drop-zone border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                            <div id="imagePreview" class="flex flex-wrap gap-4 mb-4"></div>
+                            <input type="file" id="imageUpload" accept="image/*" multiple class="hidden">
+                            <button type="button" onclick="document.getElementById('imageUpload').click()" 
+                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                <i class="fas fa-upload mr-2"></i>Upload Images
+                            </button>
+                            <p class="text-gray-500 mt-2">Upload up to 10 images (JPEG, PNG) or drag and drop</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Product Name*</label>
+                            <input type="text" class="w-full p-2 border rounded" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Brand</label>
+                            <input type="text" class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Description*</label>
+                        <textarea class="w-full p-2 border rounded h-32" required></textarea>
+                    </div>
+
+                    <!-- Pricing -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Price ($)*</label>
+                            <input type="number" step="0.01" min="0" class="w-full p-2 border rounded" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Quantity*</label>
+                            <input type="number" min="0" class="w-full p-2 border rounded" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Category*</label>
+                            <select class="w-full p-2 border rounded" required>
+                                <option value="">Select a category</option>
+                                <option>Electronics</option>
+                                <option>Home & Kitchen</option>
+                                <option>Books</option>
+                                <option>Clothing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded">
+                            Save Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
