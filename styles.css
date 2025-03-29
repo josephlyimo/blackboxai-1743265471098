@@ -1,0 +1,28 @@
+/* Additional styles beyond Tailwind */
+.link {
+    @apply hover:underline cursor-pointer;
+}
+
+.button {
+    @apply transition-colors duration-200;
+}
+
+/* Product card transitions */
+.relative.m-5.bg-white {
+    @apply transition-all duration-300 ease-in-out;
+}
+
+/* Hero banner fade effect */
+.bg-gradient-to-t {
+    background: linear-gradient(to top, rgba(243, 244, 246, 1), rgba(243, 244, 246, 0));
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .flex.items-center.space-x-6 {
+        @apply space-x-3;
+    }
+    .hidden.sm\:flex {
+        @apply hidden;
+    }
+}
