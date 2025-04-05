@@ -180,6 +180,21 @@ if (document.getElementById('imageUpload')) {
                         submitBtn.textContent = 'Save Product';
                         e.target.reset();
                         imagePreview.innerHTML = '';
+                        
+                        // Store product in localStorage
+                        const product = {
+                            name: document.getElementById('productName').value,
+                            price: document.getElementById('productPrice').value,
+                            description: document.getElementById('productDescription').value,
+                            images: Array.from(imageUpload.files).map(file => URL.createObjectURL(file))
+                        };
+                        
+                        let products = JSON.parse(localStorage.getItem('products') || '[]');
+                        products.push(product);
+                        localStorage.setItem('products', JSON.stringify(products));
+                        
+                        // Redirect to home page
+                        window.location.href = '/index.html';
                     }, 1500);
                 }
             });
