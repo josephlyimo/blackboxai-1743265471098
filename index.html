@@ -74,32 +74,46 @@
         </div>
 
         <!-- Product Grid -->
-        <div class="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto max-w-7xl">
-            <!-- Product 1 -->
-            <div class="relative m-5 bg-white z-30 p-5 rounded-md">
-                <p class="absolute top-2 right-2 text-xs italic text-gray-400">Category</p>
-                <img src="https://m.media-amazon.com/images/I/71Swqqe7XAL._AC_UY218_.jpg" 
-                     alt="Product" class="h-48 w-full object-contain">
-                <h4 class="my-3 font-medium">Amazon Echo (3rd Gen) - Smart speaker with Alexa</h4>
-                <div class="flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star-half-alt text-yellow-400"></i>
-                </div>
-                <p class="text-xs my-2 line-clamp-2">Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small spaces.</p>
-                <div class="mb-5">
-                    <p class="font-bold">$29.99</p>
-                    <p class="text-xs text-gray-500">FREE Delivery</p>
-                </div>
-                <button class="mt-auto button bg-yellow-400 rounded-sm py-1 px-3 text-xs font-medium hover:bg-yellow-500">
-                    Add to Cart
-                </button>
-            </div>
-
-            <!-- More products would go here following same pattern -->
+        <div id="productsContainer" class="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto max-w-7xl">
+            <!-- Products will be dynamically inserted here -->
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const productsContainer = document.getElementById('productsContainer');
+                const products = JSON.parse(localStorage.getItem('products') || '[]');
+                
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'relative m-5 bg-white z-30 p-5 rounded-md';
+                    
+                    productCard.innerHTML = `
+                        ${product.images.length ? `
+                            <img src="${product.images[0]}" 
+                                 alt="${product.name}" class="h-48 w-full object-contain">
+                        ` : ''}
+                        <h4 class="my-3 font-medium">${product.name}</h4>
+                        <div class="flex">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star-half-alt text-yellow-400"></i>
+                        </div>
+                        <p class="text-xs my-2 line-clamp-2">${product.description}</p>
+                        <div class="mb-5">
+                            <p class="font-bold">$${product.price}</p>
+                            <p class="text-xs text-gray-500">FREE Delivery</p>
+                        </div>
+                        <button class="mt-auto button bg-yellow-400 rounded-sm py-1 px-3 text-xs font-medium hover:bg-yellow-500">
+                            Add to Cart
+                        </button>
+                    `;
+                    
+                    productsContainer.appendChild(productCard);
+                });
+            });
+        </script>
     </main>
 
     <!-- Footer -->
